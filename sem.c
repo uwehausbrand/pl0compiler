@@ -577,6 +577,26 @@ int st22()
 	return OK;
 }
 
+/* if */
+int st24()
+{
+	code(jmp, 0);
+	popAndInsLabel(2);
+
+	pushLabel();
+
+	return OK;
+}
+
+/* if */
+int st26()
+{
+	// Label auskellern, Relativadresse berechnen, Relativadresse in jmp-Befehl eintragen
+ 	popAndInsLabel(2);
+	
+	return OK;
+}
+
 /*-----------------------*/
 /* Condition-Funktionen  */
 

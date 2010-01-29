@@ -162,9 +162,12 @@ const tBog gState[] =
 /*18*/ {BgSy, {(unsigned long)zTHN   }, NULL,21, 0},
 /*19*/ {BgSy, {(unsigned long)zDO    }, NULL,22, 0},
 /*20*/ {BgSy, {(unsigned long)zEND   }, NULL,23, 0},
-/*21*/ {BgGr, {(unsigned long)gState }, st21,23, 0},
+/*21*/ {BgGr, {(unsigned long)gState }, NULL,24, 0},
 /*22*/ {BgGr, {(unsigned long)gState }, st22,23, 0},
-/*23*/ {BgEn, {(unsigned long)0      }, NULL, 0, 0}
+/*23*/ {BgEn, {(unsigned long)0      }, NULL, 0, 0},
+/*24*/ {BgSy, {(unsigned long)zELSE  }, st24, 26, 25},//else-erweiterung
+/*25*/ {BgNl, {(unsigned long)0      }, st21, 23, 0}, //else-erweiterung
+/*26*/ {BgGr, {(unsigned long)gState }, st26, 23, 0} //else-erweiterung
 };
 
 

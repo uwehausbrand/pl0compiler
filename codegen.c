@@ -193,7 +193,7 @@ int popAndInsLabel(int x)
 		RemoveItem(pLLabel);
 
 		addr  = (int)pCode - (int)pAddr; /* Relativadresse berechnen */
-		printf("pCode: %d, pAddr: %d, rel: %d\n", (int)pCode, (int)pAddr, addr);
+		printf("pCode: %X, pAddr: %X, rel: %d\n", (int)pCode, (int)pAddr, addr);
 		wr2ToCodeAtP(addr, pAddr-x);
 	}
 	else

@@ -163,6 +163,12 @@ int st9();
 /* if statement */
 int st21();
 
+/* if else */
+int st24();
+
+/* else statement */
+int st26();
+
 /* while */
 int st2();
 
