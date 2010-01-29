@@ -5,6 +5,7 @@
 parse
 lexer
 rlinux
+outCl0
 *.swp
 *.swo
 *.cl0

@@ -1,0 +1,17 @@
+var a,b,Max;
+begin
+  ?a;
+  while a>0 do
+  if a<=6 then
+	begin
+	  	!a;
+		a:=a+1
+	end
+  else
+	begin
+	  	!"a>6,BEENDE";
+		a:=-1
+	end
+end.
+
+
