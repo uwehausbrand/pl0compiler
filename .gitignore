@@ -1,0 +1,11 @@
+*~
+*.out
+*.tar
+*.gz
+parse
+lexer
+rlinux
+*.swp
+*.swo
+*.cl0
+*.pl0
