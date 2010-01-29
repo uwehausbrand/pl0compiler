@@ -80,7 +80,7 @@ static char vZKl[128]=
 
 /* Automatentabelle */
 
-static char vSMatrix[12][17]=
+static char vSMatrix[13][17]=
 /*         So      Zi(0) Zi(1-9)  HexBu  Bu(G-Z) Bu(x)   ':'     '='     '<'     '>'    Space    '('      '*'       ')'     '"'      /    EOT(EOF) */
 /* 0 */{{0+ifslb,7+ifsl ,1+ifsl ,2+ifgl ,2+ifgl ,2+ifgl ,3+ifsl ,0+ifslb,4+ifsl ,5+ifsl ,0+ifl  ,0+ifslb ,0+ifslb ,0+ifslb ,6+ifl  ,9+ifsl ,0+ifb}, /*Startzustand*/
 /* 1 */ {0+ifb  ,1+ifsl ,1+ifsl ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*Zahl*/
@@ -89,11 +89,12 @@ static char vSMatrix[12][17]=
 /* 4 */ {0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifslb,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*<*/
 /* 5 */ {0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifslb,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*>*/
 /* 6 */ {6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl ,6+ifsl  ,6+ifsl  ,6+ifsl  ,0+iflb ,6+ifsl ,0+ifb}, /*String*/
-/* 7 */ {0+ifb  ,1+ifsl ,1+ifsl ,0+ifb  ,0+ifb  ,8+ifsl ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*pot. Hexzahl(immernoch Zahl)*/
+/* 7 */ {0+ifb  ,1+ifsl ,1+ifsl ,0+ifb  ,0+ifb  ,12+ifsl,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*pot. Hexzahl(immernoch Zahl)*/
 /* 8 */ {0+ifb  ,8+ifsl ,8+ifsl ,8+ifgl ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*Hexzahl*/
 /* 9 */ {0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,10+ifsl ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb}, /*pot. kommentaranfang*/
 /* 10 */{10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl ,11+ifsl ,10+ifsl ,10+ifsl,10+ifsl,0+ifb}, /*kommentare*/
-/* 11 */{10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl ,11+ifsl ,10+ifsl ,10+ifsl,0+ifrl ,0+ifb}}; /*pot. kommentarende*/
+/* 11 */{10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl,10+ifsl ,11+ifsl ,10+ifsl ,10+ifsl,0+ifrl ,0+ifb}, /*pot. kommentarende*/
+/* 12 */{0+ifb  ,8+ifsl ,8+ifsl ,8+ifgl ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb  ,0+ifb   ,0+ifb   ,0+ifb   ,0+ifb  ,0+ifb  ,0+ifb} /*Hexzahl,bei abbruch fehler*/};
 /* problem x entfaellt bei falscher hexzahl*/
 
 tKeyWordTab mSclW['Z'-'A'+1][8]=
@@ -134,10 +135,12 @@ static void fgl (void);
 static void fsl (void);
 static void fslb(void);
 static void flb(void);
+static void fr(void);
+static void frl(void);
 
 typedef void (*FX)(void);
 
-static FX vfx[]={fl,fb,fgl,fsl,fslb,flb};
+static FX vfx[]={fl,fb,fgl,fsl,fslb,flb,fr,frl};
 
 /*---- Lexikalische Analyse ----*/
 tMorph* Lex(void)
@@ -243,10 +246,6 @@ static void fg(void)
 	vBuf[len+1] = '\0';
 }
 
-static void fr(void)
-{
-	vBuf[0]='\0';
-}
 
 static void fb(void)
 {
@@ -351,10 +350,13 @@ static void fb(void)
 			//exit(1);
 			//break;
 	case 11://pot. Kommentarende
+			printf("[%d,%d] ungueltiger Zustand! Lexer akzeptiert eingabe nicht!\n",cur_line+1,cur_column+1);
+			exit(1);
+			break;
+	case 12://falsche Hexzahl (0x)
 			printf("[%d,%d] ungueltiger Zustand! Lexer akzeptiert eingabe nicht!\n",cur_line+1,cur_column+1-len);
 			exit(1);
 			break;
-
 	}
 	Ende=1;
 	vBuf[0]='\0';
@@ -384,3 +386,15 @@ static void flb(void)
 	fl();
 	fb();
 }
+
+static void fr(void)
+{
+	vBuf[0]='\0';
+}
+
+static void frl(void)
+{
+	fr();
+	fl();
+}
+

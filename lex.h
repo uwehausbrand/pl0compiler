@@ -4,7 +4,9 @@ typedef enum T_Fx {
 	ifgl=0x20,
 	ifsl=0x30,
 	ifslb=0x40,
-	iflb=0x50
+	iflb=0x50,
+	ifr=0x60,
+	ifrl=0x70
 } tFx;
 
 /* Morphemcodes */
