@@ -104,7 +104,7 @@ tKeyWordTab mSclW['Z'-'A'+1][8]=
 /* B */ {{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{"EGIN",zBGN},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
 /* C */ {{0L ,zNIL},{0L, zNIL},{"ALL",zCLL},{"ONST",zCST},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
 /* D */ {{"O",zDO},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
-/* E */ {{0L ,zNIL},{"ND",zEND},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
+/* E */ {{0L ,zNIL},{"ND",zEND},{"LSE" ,zELSE},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
 /* F */ {{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
 /* G */ {{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
 /* H */ {{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL},{0L ,zNIL},{0L, zNIL}},
@@ -194,7 +194,8 @@ int main(int argc, char*argv[])
 				if (Morph.Val.Symb==zVAR)   printf("Symbol,_VAR\n");  else
 				if (Morph.Val.Symb==zWHL)   printf("Symbol,_WHILE\n");else
 				if (Morph.Val.Symb==zOR)   printf("Symbol,_OR\n"); else 
-				if (Morph.Val.Symb==zAND)   printf("Symbol,_AND\n");
+				if (Morph.Val.Symb==zAND)   printf("Symbol,_AND\n");else
+				if (Morph.Val.Symb==zELSE)   printf("Symbol,_ELSE\n");
 	//			printf("case mcSymb printable\n");
 				if (isprint(Morph.Val.Symb))printf("Symbol,%c\n",(char)Morph.Val.Symb);
 				break;
