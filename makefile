@@ -8,4 +8,5 @@ lexer: lexframe.c
 
 clean:
 	rm -f parse
+	rm -f lexer
 	rm -f *~
