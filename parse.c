@@ -57,8 +57,10 @@ const tBog gFactor[] =
 /* 1*/ {BgSy, {(unsigned long)'('    }, NULL, 2, 4},
 /* 2*/ {BgGr, {(unsigned long)gExpr  }, NULL, 3, 0},
 /* 3*/ {BgSy, {(unsigned long)')'    }, NULL, 5, 0},
-/* 4*/ {BgMo, {(unsigned long)mcIdent}, fa4 , 5, 0},
-/* 5*/ {BgEn, {(unsigned long)0      }, NULL, 0, 0}
+/* 4*/ {BgMo, {(unsigned long)mcIdent}, fa4 , 5, 6},
+/* 5*/ {BgEn, {(unsigned long)0      }, NULL, 0, 0},
+/* 6*/ {BgSy, {(unsigned long)zCLL   }, fa6 , 7, 0},
+/* 7*/ {BgMo, {(unsigned long)mcIdent}, st13, 5, 0}
 };
 
 
@@ -147,7 +149,7 @@ const tBog gState[] =
 /* 3*/ {BgSy, {(unsigned long)zBGN   }, NULL,11, 4},
 /* 4*/ {BgSy, {(unsigned long)zCLL   }, NULL,13, 5},
 /* 5*/ {BgSy, {(unsigned long)'?'    }, NULL,14, 6},
-/* 6*/ {BgSy, {(unsigned long)'!'    }, NULL,15, 0},
+/* 6*/ {BgSy, {(unsigned long)'!'    }, NULL,15,27},
 /* 7*/ {BgNl, {(unsigned long)0      }, NULL,23, 0},
 /* 8*/ {BgSy, {(unsigned long)zErg   }, NULL,17, 0},
 /* 9*/ {BgGr, {(unsigned long)gCondList }, st9 ,18, 0},//and/or-erweiterung
@@ -165,9 +167,11 @@ const tBog gState[] =
 /*21*/ {BgGr, {(unsigned long)gState }, NULL,24, 0},
 /*22*/ {BgGr, {(unsigned long)gState }, st22,23, 0},
 /*23*/ {BgEn, {(unsigned long)0      }, NULL, 0, 0},
-/*24*/ {BgSy, {(unsigned long)zELSE  }, st24, 26, 25},//else-erweiterung
-/*25*/ {BgNl, {(unsigned long)0      }, st21, 23, 0}, //else-erweiterung
-/*26*/ {BgGr, {(unsigned long)gState }, st26, 23, 0} //else-erweiterung
+/*24*/ {BgSy, {(unsigned long)zELSE  }, st24,26,25},//else-erweiterung
+/*25*/ {BgNl, {(unsigned long)0      }, st21,23, 0}, //else-erweiterung
+/*26*/ {BgGr, {(unsigned long)gState }, st26,23, 0}, //else-erweiterung
+/*27*/ {BgSy, {(unsigned long)zRET   }, st27,28, 7}, //return-erweiterung
+/*28*/ {BgGr, {(unsigned long)gExpr  }, st28,23, 0} //return-erweiterung
 };
 
 

@@ -187,6 +187,12 @@ int st14();
 /* ! Ausgabe */
 int st15();
 
+/* ! Ausgabe */
+int st27();
+
+/* ! Ausgabe */
+int st28();
+
 /* condition odd */
 int co2();
 
@@ -236,5 +242,8 @@ int fa0();
 
 /* Ident */
 int fa4();
+
+/* Ident */
+int fa6();
 
 #endif

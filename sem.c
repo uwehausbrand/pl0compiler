@@ -445,6 +445,7 @@ int st10()
 int st13()
 {
 	// globale Suche nach dem Bezeichner
+	//printf("Morph.Val.pStr=%s\n",Morph.Val.pStr);
 	tBez* pBez = searchBezGlobal(Morph.Val.pStr);
 	if (pBez == NULL)
 	{
@@ -458,12 +459,12 @@ int st13()
 		{
 			if (((tConst*)(pBez->pObj))->Kz == KzConst) 
 			{
-				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
+				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur--0\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
 				exit(1);
 			}
 			else if (((tVar*)(pBez->pObj))->Kz == KzVar) 
 			{
-				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
+				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur--2\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
 				exit(1);
 
 			}
@@ -474,7 +475,7 @@ int st13()
 			}
 			else 
 			{
-				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
+				printf("%s:%d,%d: Fehler: aufgerufenes Objekt `%s' ist keine Prozedur--1\n", filename, Morph.PosLine, Morph.PosCol, Morph.Val.pStr);
 				exit(1);
 			}
 		}
@@ -593,6 +594,24 @@ int st26()
 {
 	// Label auskellern, Relativadresse berechnen, Relativadresse in jmp-Befehl eintragen
  	popAndInsLabel(2);
+	
+	return OK;
+}
+
+/* if */
+
+int st27()
+{
+	code(puAdrVrLocl,-16);
+	
+	return OK;
+}
+
+/* if */
+int st28()
+{
+	code(storeVal);
+	//code(retProc);
 	
 	return OK;
 }
@@ -803,6 +822,26 @@ int fa4()
 			}
 		}
 	}
+	
+	return OK;
+}
+
+int fa6()
+{
+
+	tConst* pConst;
+	
+	// Konstante in der Konstantenliste suchen
+	pConst = searchConst(0);
+	if (pConst == NULL)
+	{
+		//Konstante anlegen
+		pConst = createConst(0);
+		InsertTail(pLConst, pConst);
+	}
+	
+	// Codegenerierung puConst
+	code(puConst, pConst->Idx);
 	
 	return OK;
 }
