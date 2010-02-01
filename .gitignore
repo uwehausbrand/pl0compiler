@@ -10,3 +10,4 @@ outCl0
 *.swo
 *.cl0
 *.pl0
+.kdbgrc.*
