@@ -1,6 +1,6 @@
 compiler: parser
 
-
+parameter
 parser: parse.c sem.c list.c lexframe.c codegen.c
 	gcc -g -Wall parse.c sem.c list.c lexframe.c codegen.c -o parse
 
